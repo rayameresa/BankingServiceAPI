@@ -89,38 +89,51 @@ This repository contains the implementation of a backend service (`BankingServic
 1. Start Zookeeper:
    ```bash
    bin/zookeeper-server-start.sh config/zookeeper.properties
+   ```
 2. Start Kafka:
    ```bash
-    bin/kafka-server-start.sh config/server.properties 
+   bin/kafka-server-start.sh config/server.properties
+   ```
+
 ## How to Run
 
 ### BankingServiceAPI
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-repo/BankingServiceAPI.git
+   git clone https://github.com/rayameresa/BankingServiceAPI.git
    cd BankingServiceAPI
+   ```
 2. Build the application:
    ```bash
-    mvn clean install
+   mvn clean install
+   ```
 3. Start the service:
    ```bash
-    mvn spring-boot:run
+   mvn spring-boot:run
+   ```
 4. Access the API documentation:
    ```bash
-    http://localhost:8080/swagger-ui.html
+   http://localhost:8080/swagger-ui.html
+   ```
 ### ConsumerService
 1. Navigate to the ConsumerService folder:
    ```bash
-    cd ConsumerService
+   cd ConsumerService
+   ```
 2. Build the consumer service:
    ```bash
-    mvn clean install
+   mvn clean install
+   ```
 3. Start the consumer service:
    ```bash
-    mvn spring-boot:run  
-###API Endpoints
-##BankingServiceAPI
-A. Accounts
+   mvn spring-boot:run
+   ```
+
+### API Endpoints
+
+#### BankingServiceAPI
+
+**A. Accounts**
 1. Create an account:
    ```bash
     POST /accounts
@@ -133,7 +146,8 @@ A. Accounts
 4. Get all accounts (Paginated):
    ```bash
     GET /accounts?page={page}&size={size}
-B. Customers
+```
+**B. Customers**
 1. Create a customer:
    ```bash
     POST /customers
@@ -143,7 +157,8 @@ B. Customers
 3. Get all customers (Paginated):
    ```bash
     GET /customers?page={page}&size={size}
-C. Transactions
+```
+**C. Transactions**
 1. Record transactions:
    ```bash
     POST /transactions
@@ -156,10 +171,35 @@ C. Transactions
 4. Filter transactions by time range:
    ```bash
     GET /transactions/filter?accountId={accountId}&from={fromDate}&to={toDate}
-##Testing
+```
+## Testing
 ### Event-Driven Workflow
 1. Account Creation: Publishes account-events to Kafka.
 2. Transaction Recording: Publishes transaction-events to Kafka.
 3. Transfer Events: Publishes transfer-events to Kafka.
-### ConsumerService
+#### ConsumerService
 The consumer service listens to all events (account-events, transaction-events, customer-events, and transfer-events) and logs the payloads.
+
+---
+
+## Contributing
+
+1. Create a feature branch from `main`: `git checkout -b feature/your-change`
+2. Make your changes and commit with a clear message.
+3. Push the branch and open a Pull Request to `main`.
+
+---
+
+## How to use it in your repo
+
+1. **Copy into your repo:**
+   - `.github/workflows/code-review.yml`
+   - `scripts/code-review-agent.py`
+
+2. **Commit and push.**
+
+3. **Open a PR;** the workflow runs and posts the heuristic review as a comment.
+
+4. **(Optional)** Add `OPENAI_API_KEY` as a repo secret if you want AI review; without it, the agent still does the full heuristic review above.
+
+More detail and customization notes are in **CODE_REVIEW_INTEGRATION.md** in this repo. You can add more patterns in the `patterns` list in `scripts/code-review-agent.py` (in `heuristic_review()`) to cover more scenarios.
