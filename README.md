@@ -187,3 +187,25 @@ The consumer service listens to all events (account-events, transaction-events, 
 1. Create a feature branch from `main`: `git checkout -b feature/your-change`
 2. Make your changes and commit with a clear message.
 3. Push the branch and open a Pull Request to `main`.
+
+---
+
+## How to integrate into your GitHub repo
+
+1. **Copy the files into your repo**  
+   From this repo, copy into your project:
+   - `.github/workflows/code-review.yml`
+   - `scripts/code-review-agent.py`
+
+   So your repo has:
+
+   ```
+   your-repo/
+   ├── .github/
+   │   └── workflows/
+   │       └── code-review.yml
+   └── scripts/
+       └── code-review-agent.py
+   ```
+
+   The workflow runs on every pull request (opened, updated, or reopened) and posts a code review comment. Optionally add `OPENAI_API_KEY` as a repository secret for AI-powered review; otherwise heuristic checks run.
