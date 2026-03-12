@@ -190,22 +190,16 @@ The consumer service listens to all events (account-events, transaction-events, 
 
 ---
 
-## How to integrate into your GitHub repo
+## How to use it in your repo
 
-1. **Copy the files into your repo**  
-   From this repo, copy into your project:
+1. **Copy into your repo:**
    - `.github/workflows/code-review.yml`
    - `scripts/code-review-agent.py`
 
-   So your repo has:
+2. **Commit and push.**
 
-   ```
-   your-repo/
-   ├── .github/
-   │   └── workflows/
-   │       └── code-review.yml
-   └── scripts/
-       └── code-review-agent.py
-   ```
+3. **Open a PR;** the workflow runs and posts the heuristic review as a comment.
 
-   The workflow runs on every pull request (opened, updated, or reopened) and posts a code review comment. Optionally add `OPENAI_API_KEY` as a repository secret for AI-powered review; otherwise heuristic checks run.
+4. **(Optional)** Add `OPENAI_API_KEY` as a repo secret if you want AI review; without it, the agent still does the full heuristic review above.
+
+More detail and customization notes are in **CODE_REVIEW_INTEGRATION.md** in this repo. You can add more patterns in the `patterns` list in `scripts/code-review-agent.py` (in `heuristic_review()`) to cover more scenarios.
